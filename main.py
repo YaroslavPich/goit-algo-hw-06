@@ -46,17 +46,20 @@ class Record:
         return False
 
     def edit_phone(self, oldphone: str, newphone: str) -> bool:
-        for p in self.phones:
-            if p.value == oldphone:
-                p.value = newphone
-                return True
-            else:
-                raise ValueError("Enter the phone number from the phone book.")
+        if len(newphone) == 10 and newphone.isdigit():
+            for p in self.phones:
+                if p.value == oldphone:
+                    p.value = newphone
+                    return True
+                else:
+                    raise ValueError("Enter the phone number from the phone book.")
+        else:
+            raise ValueError('Enter a 10-digit phone number!')
 
     def find_phone(self, phone: str):
         for p in self.phones:
             if p.value == phone:
-                return Phone(phone)
+                return p
         return None
 
     def __str__(self):
